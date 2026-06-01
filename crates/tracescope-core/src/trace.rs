@@ -150,11 +150,12 @@ mod tests {
 
     #[test]
     fn roots_are_parentless() {
-        let roots = sample().roots();
+        let trace = sample();
+        let roots = trace.roots();
         assert_eq!(roots.len(), 1);
         assert_eq!(roots[0].id, 1);
     }
-
+    
     #[test]
     fn validate_accepts_well_formed_trace() {
         assert!(sample().validate().is_ok());
