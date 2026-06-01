@@ -12,3 +12,10 @@ description = "Pure trace model and performance-analysis algorithms for tracesco
 serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "analysis"
+harness = false
