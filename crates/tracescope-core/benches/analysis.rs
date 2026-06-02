@@ -6,9 +6,9 @@
 
 use std::hint::black_box;
 
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 
-use tracescope_core::{analyze, Span, Trace};
+use tracescope_core::{Span, Trace, analyze};
 
 /// Builds a trace: one root with `width` children, each child having one leaf.
 /// Produces `1 + 2 * width` spans with a realistic two-level shape.

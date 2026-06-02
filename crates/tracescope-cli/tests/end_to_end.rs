@@ -31,7 +31,9 @@ fn run_workload() -> tracescope_core::AnalysisReport {
         collector.clock().advance(5);
     }
     let trace = collector.finish();
-    trace.validate().expect("collected trace should be structurally valid");
+    trace
+        .validate()
+        .expect("collected trace should be structurally valid");
     analyze(&trace)
 }
 
@@ -47,7 +49,10 @@ fn db_query_is_the_top_bottleneck() {
     let report = run_workload();
     // Self times: db_query 40, render 15 (25 - serialize 10), serialize 10,
     // handle_request 10 (75 - 40 - 25). db_query leads.
-    let top = report.bottlenecks.first().expect("expected at least one bottleneck");
+    let top = report
+        .bottlenecks
+        .first()
+        .expect("expected at least one bottleneck");
     assert_eq!(top.name, "db_query");
     assert_eq!(top.self_ns, 40);
 }
@@ -56,7 +61,11 @@ fn db_query_is_the_top_bottleneck() {
 fn critical_path_follows_last_finishing_children() {
     let report = run_workload();
     // root -> render (ends 70, after db_query's 45) -> serialize (ends 70).
-    let names: Vec<&str> = report.critical_path.iter().map(|s| s.name.as_str()).collect();
+    let names: Vec<&str> = report
+        .critical_path
+        .iter()
+        .map(|s| s.name.as_str())
+        .collect();
     assert_eq!(names, vec!["handle_request", "render", "serialize"]);
 }
 

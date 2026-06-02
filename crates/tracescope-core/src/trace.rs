@@ -79,7 +79,10 @@ impl Trace {
         let mut ids: HashSet<SpanId> = HashSet::new();
         for span in &self.spans {
             if !ids.insert(span.id) {
-                return Err(CoreError::Validation(format!("duplicate span id {}", span.id)));
+                return Err(CoreError::Validation(format!(
+                    "duplicate span id {}",
+                    span.id
+                )));
             }
             if span.end_ns < span.start_ns {
                 return Err(CoreError::Validation(format!(
@@ -155,7 +158,7 @@ mod tests {
         assert_eq!(roots.len(), 1);
         assert_eq!(roots[0].id, 1);
     }
-    
+
     #[test]
     fn validate_accepts_well_formed_trace() {
         assert!(sample().validate().is_ok());

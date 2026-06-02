@@ -16,6 +16,6 @@ pub mod trace;
 pub use critical_path::CriticalSpan;
 pub use error::CoreError;
 pub use flamegraph::FoldedStack;
-pub use report::{analyze, AnalysisReport, Bottleneck};
+pub use report::{AnalysisReport, Bottleneck, analyze};
 pub use span::{Span, SpanId};
 pub use trace::Trace;

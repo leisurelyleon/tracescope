@@ -4,8 +4,8 @@ use std::collections::BTreeMap;
 
 use serde::Serialize;
 
-use crate::critical_path::{critical_path as compute_critical_path, CriticalSpan};
-use crate::flamegraph::{fold, FoldedStack};
+use crate::critical_path::{CriticalSpan, critical_path as compute_critical_path};
+use crate::flamegraph::{FoldedStack, fold};
 use crate::percentile::percentile;
 use crate::trace::Trace;
 
@@ -42,7 +42,10 @@ impl AnalysisReport {
 
         out.push_str("\nTop bottlenecks (self time):\n");
         for bottleneck in self.bottlenecks.iter().take(5) {
-            out.push_str(&format!("  {:<16} {} ns\n", bottleneck.name, bottleneck.self_ns));
+            out.push_str(&format!(
+                "  {:<16} {} ns\n",
+                bottleneck.name, bottleneck.self_ns
+            ));
         }
 
         out.push_str("\nCritical path:\n");

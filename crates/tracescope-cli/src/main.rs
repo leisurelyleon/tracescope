@@ -8,7 +8,7 @@ use clap::Parser;
 
 use tracescope_cli::cli::{Cli, Command};
 use tracescope_collect::{Collector, ManualClock};
-use tracescope_core::{analyze, Trace};
+use tracescope_core::{Trace, analyze};
 
 fn main() -> ExitCode {
     let cli = Cli::parse();
